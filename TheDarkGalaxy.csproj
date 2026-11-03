@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	  <LangVersion>13.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <RestoreAdditionalProjectSources>
+		  https://api.nuget.org/v3/index.json;
+		  https://nuget.bepinex.dev/v3/index.json;
+		  https://nuget.samboy.dev/v3/index.json
+	  </RestoreAdditionalProjectSources>
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	  <RootNamespace>Dark</RootNamespace>
+  </PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
+		<PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+	</ItemGroup>
+
+	<Target Name="AddGameReferences" BeforeTargets="ResolveAssemblyReferences">
+		<ItemGroup>
+			<_LibDlls Include=".\Libs\*.dll" Exclude="..\Libs\netstandard.dll" />
+			<Reference Include="@(_LibDlls->'%(FileName)')">
+				<HintPath>%(FullPath)</HintPath>
+				<Private>false</Private>
+			</Reference>
+		</ItemGroup>
+	</Target>
+  <ItemGroup>
+    <PackageReference Include="Krafs.Publicizer" Version="2.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+	<ItemGroup>
+		<Publicize Include="Nebula" IncludeCompilerGeneratedMembers="false" />
+		<DoNotPublicize Include="Nebula:Nebula.Roles.Abilities.EquipableAbility" />
+		<Publicize Include="Nebula:Nebula.Roles.Abilities.EquipableAbility.set_Renderer" />
+		<Publicize Include="NebulaAPI" IncludeCompilerGeneratedMembers="false" />
+	</ItemGroup>
+	<Target Name="RemoveIgnoresAccessChecksToAttributeCs" AfterTargets="PublicizeAssemblies">
+		<ItemGroup>
+			<FilesToRemove Include="@(Compile)" Condition="'%(Filename)' == 'IgnoresAccessChecksToAttribute'" />
+		</ItemGroup>
+		<ItemGroup>
+			<Compile Remove="@(FilesToRemove)" />
+		</ItemGroup>
+	</Target>
+	<ItemGroup>
+	  <Folder Include="Resources\Citations\" />
+	  <Folder Include="Scripts\Roles\Impostor\" />
+	</ItemGroup>
+</Project>
