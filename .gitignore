@@ -430,3 +430,5 @@ FodyWeavers.xsd
 # zip
 *.zip
 *.rar
+# *.meta
+!addon.meta

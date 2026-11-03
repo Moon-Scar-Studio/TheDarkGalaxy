@@ -1,0 +1,11 @@
+{
+	"Id": "TheDarkGalaxy",
+	"Name": "The Dark Galaxy",
+	"Author": "Moon-Scar Studio",
+	"Description": "添加了一些职业与功能。",
+	"Version": "1.0.0",
+	"Build": 0,
+	"Dependency": [
+	],
+	"Hidden": "False"
+}
