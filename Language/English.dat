@@ -1,1 +1,19 @@
 ﻿
+# Help filters
+"help.filter.faction" : "Faction"
+"help.filter.citation" : "Citation"
+"help.filter.all" : "All"
+"help.filter.none" : "No citation"
+"help.filter.reset" : "Reset"
+"help.filter.empty" : "No matching roles"
+
+"Citation.WereWolf.name" : "Werewolf"
+"help.filter.faction.button" : "Faction Filter"
+"help.filter.citation.button" : "Citation Filter"
+"help.filter.clear.button" : "Clear Filters"
+"help.filter.faction.title" : "Faction Filter"
+"help.filter.citation.title" : "Citation Filter"
+"help.filter.tab.image" : "Images"
+"help.filter.tab.text" : "Text"
+"help.filter.confirm" : "Confirm"
+"help.filter.cancel" : "Cancel"

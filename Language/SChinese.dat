@@ -1,6 +1,6 @@
 ﻿# Citation
 
-"Citations.WereWolf.name" : "狼人杀"
+"Citation.WereWolf.name" : "狼人杀"
 
 # Roles
 
@@ -8,6 +8,7 @@
 "role.maskeddancer.short" : "假舞"
 "role.maskeddancer.blurb" : "跟我一起共舞吧？"
 "options.role.maskeddancer.detail" : "假面舞者可以邀请三人并且开启舞会。<br>根据被邀请者的阵营来决定舞会效果。"
+"role.maskeddancer.doc" : "邀请三名玩家参加舞会。在下一轮会议结束后可开启舞会"
 "role.maskeddancer.ability.title" : "<b>固有能力【假面舞会】</b>"
 "role.maskeddancer.ability.main" : "可以使用<b>邀请</b>来邀请三人。<br>邀请三人并且本轮结束后、可以<b>开启舞会</b><br>选择的人中，如果有两个相同阵营且这个阵营不是中立，那么击杀阵营不同者。<br>如果有两个中立阵营，那么<var>%NEU%</var><br>如果三个阵营均有，那么随机死一个被邀请者。<br>其余情况下，假面舞者自杀。"
 "role.maskeddancer.doc.invite" : "<b>邀请</b><br>邀请一人来到舞会"
@@ -22,18 +23,36 @@
 "options.role.maskeddancer.neu.killrandomnoneu" : "击杀非中立被邀请者"
 "button.label.maskeddancer.InviteBtn" : "邀请"
 "button.label.maskeddancer.StartBtn" : "开启舞会"
-"role.maskeddancer.tips" : "· 本职业由插件<b>The Dark Galaxy</b>添加。"
+"role.maskeddancer.tips" : "· 本职业由<b>The Dark Galaxy</b>添加。"
 
 # States
 "state.partyAccident" : "舞会事故"
 
 # Options
-"options.tdg.showtaskpanel" : "会议内显示任务面板"
-"options.tdg.showplayerleftdetail" : "显示详细退出信息"
-"options.tdg.showplayerleftdetail.detail" : "当有玩家退出时，显示的断线信息为更详细的原因。"
+"config.client.options.tdg.showtaskpanel" : "会议内显示任务面板"
+"config.client.options.tdg.showplayerleftdetail" : "显示详细退出信息"
+"config.client.options.tdg.showplayerleftdetail.detail" : "当有玩家退出时，显示的断线信息为更详细的原因。"
 
 # 提示
 "notifier.disconnectmsg.exit": "<color=#%COLOR%>%NAME%</color> <color=red>主动离开</color>了游戏。 (%REA%)",
 "notifier.disconnectmsg.ban": "<color=#%COLOR%>%NAME%</color> <color=#D32F2F>被封禁于该房间。</color> (%REA%)",
 "notifier.disconnectmsg.kick": "<color=#%COLOR%>%NAME%</color> <color=#FF9800>被踢出了该房间。</color> (%REA%)",
 "notifier.disconnectmsg.disconnect": "<color=#%COLOR%>%NAME%</color> <color=#FFC107>与服务器断开了连接。</color> (%REA%)",
+
+# Help filters
+"help.filter.faction" : "阵营"
+"help.filter.citation" : "引用"
+"help.filter.all" : "全部"
+"help.filter.none" : "无引用"
+"help.filter.reset" : "重置"
+"help.filter.empty" : "没有符合条件的职业"
+
+"help.filter.faction.button" : "阵营筛选"
+"help.filter.citation.button" : "引用筛选"
+"help.filter.clear.button" : "清除筛选"
+"help.filter.faction.title" : "阵营筛选"
+"help.filter.citation.title" : "引用筛选"
+"help.filter.tab.image" : "图片"
+"help.filter.tab.text" : "文字"
+"help.filter.confirm" : "确定"
+"help.filter.cancel" : "取消"

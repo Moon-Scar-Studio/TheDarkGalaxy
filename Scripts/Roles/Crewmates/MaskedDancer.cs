@@ -165,7 +165,7 @@ public class MaskedDancer : DefinedRoleTemplate, HasCitation, RuntimeAssignableG
                     {
                     var ts = InvitePlayers.Where(p => p.Role.Role.Category == RoleCategory.NeutralRole).ToList();
 
-                        var t = ts[0];
+                        var t = ts[UnityEngine.Random.Range(0,ts.Count)];
                         InvokeExtra(t, InvitePlayers);
                     }
                     else // 击杀剩余
@@ -244,9 +244,9 @@ public class MaskedDancer : DefinedRoleTemplate, HasCitation, RuntimeAssignableG
 [NebulaRPCHolder]
 static file class RpcSys
 {
-    record AccidentExtraDeadInfo(GamePlayer A,GamePlayer B) : GamePlayer.ExtraDeadInfo(Dark.Scripts.Core.State.PartyAccident)
+    record AccidentExtraDeadInfo(GamePlayer A,GamePlayer B) : GamePlayer.ExtraDeadInfo(Core.State.PartyAccident)
     {
-        public override string ToStateText() => $"because {A.PlayerName} and {B.PlayerName}";
+        public override string ToStateText() => $"by {A.PlayerName} and {B.PlayerName}";
     }
     public static RemoteProcess<(GamePlayer a, GamePlayer b,GamePlayer c)> RpcShareExtraInfo = new("ShareExInfoMaskedDancer",
         (message, _) => {
@@ -254,10 +254,4 @@ static file class RpcSys
         }
     );
 
-}
-
-[NebulaPreprocess(PreprocessPhase.PostLoadAddons)]
-internal static class PartyAccidentTagPreload
-{
-    static PartyAccidentTagPreload() => _ = State.PartyAccident;
 }

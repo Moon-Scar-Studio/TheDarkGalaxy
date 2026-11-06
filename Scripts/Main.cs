@@ -11,6 +11,7 @@ namespace Dark.Scripts;
 [NebulaPreprocess(PreprocessPhase.PostLoadAddons)]
 public class Main
 {
+    public const bool DebugMode = true;
     public static void Load()
     {
         Harmony harmony = new("cn.moonscar.thedarkgalaxy");
@@ -21,7 +22,7 @@ public class Main
 
     public static IEnumerator Preprocess(NebulaPreprocessor preprocessor)
     {
-        yield return preprocessor.SetLoadingText("Loading TheDarkGalaxy...");
+        yield return preprocessor.SetLoadingText("Load The Dark Galaxy");
         Load();
     }
 

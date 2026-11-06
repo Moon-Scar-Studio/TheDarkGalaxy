@@ -62,7 +62,7 @@ public static class PlayerLeftPatch
         }
 
         // 颜色取完了这里拿本体。
-
+        
         switch (reason)
         {
             case DisconnectReasons.ExitGame:

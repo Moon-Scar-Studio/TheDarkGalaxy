@@ -39,3 +39,12 @@ global using Virial.Text;
 global using Virial.DI;
 global using Dark.Scripts.Utilities;
 global using GamePlayer = Virial.Game.Player;
+
+// .NET 13的隐式using
+global using System;
+global using System.Collections.Generic;
+global using System.IO;
+global using System.Linq;
+global using System.Net.Http;
+global using System.Threading;
+global using System.Threading.Tasks;

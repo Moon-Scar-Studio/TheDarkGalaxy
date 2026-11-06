@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dark.Scripts.Utilities;
+namespace Dark.Scripts.Core;
 
-public static class RoleUtils
-{
-  
-}
+// TODO: 不知道

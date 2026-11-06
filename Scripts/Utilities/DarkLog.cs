@@ -12,7 +12,7 @@ namespace Dark.Scripts.Utilities;
 
 public static class DarkLog
 {
-    private const long MaxLogSizeBytes = 10 * 1024 * 1024; //10MB
+    private const long MaxLogSizeBytes = 10 * 1024 * 1024; // 10MB
 
     private static readonly string LogFilePath;
 
