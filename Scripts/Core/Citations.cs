@@ -22,7 +22,12 @@ public static class Citations
             ),
         "https://tdg.moonscar.cn/"
         );
+
     public static Citation Werewolf { get; private set; } = new(
         "Werewolf", null,new ColorTextComponent(Color.Red,new RawTextComponent(Language.Translate("Citation.WereWolf.name"))), "https://langrensha.163.com/"
+        );
+
+    public static Citation TheDarkGalaxy_GoodEndGambler { get; private set; } = new(
+        "GoodEndGambler",DarkUtils.AsImage("Citations/TDG_GoodEndGambler.png",125),new ColorTextComponent(Cor.Cyan,new RawTextComponent("GoodEndGambler")),"https://tdg.moonscar.cn/"
         );
 }

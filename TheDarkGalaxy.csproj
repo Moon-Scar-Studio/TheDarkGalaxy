@@ -49,7 +49,6 @@
 		</ItemGroup>
 	</Target>
 	<ItemGroup>
-	  <Folder Include="Resources\Citations\" />
-	  <Folder Include="Scripts\Roles\Impostor\" />
+	  <Folder Include="Resources\Buttons\Impostor\" />
 	</ItemGroup>
 </Project>

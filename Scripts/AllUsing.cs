@@ -39,6 +39,8 @@ global using Virial.Text;
 global using Virial.DI;
 global using Dark.Scripts.Utilities;
 global using GamePlayer = Virial.Game.Player;
+global using VVector2 = Virial.Compat.Vector2;
+global using VVector3 = Virial.Compat.Vector3;
 
 // .NET 13的隐式using
 global using System;

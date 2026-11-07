@@ -26,6 +26,7 @@ public static class State
     /// 死因：舞会事故
     /// </summary>
     public static TranslatableTag PartyAccident = new("state.partyAccident");
+    public static TranslatableTag Boom = new("state.tdg.boom");
 }
 public static class Team
 {
