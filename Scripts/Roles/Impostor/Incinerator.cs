@@ -139,10 +139,7 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
             usedBombInFirstRound = false;
             lastBombExplosionTime = -999f;
             GameOperatorManager.Instance?.Subscribe<MeetingStartEvent>(_ => firstRound = false, this);
-            GameOperatorManager.Instance?.SubscribeAchievement<GameEndEvent>(
-                "incinerator.firstRoundWin",
-                IsFirstRoundBombWin,
-                this);
+            GameOperatorManager.Instance?.SubscribeAchievement<GameEndEvent>("incinerator.firstRoundWin",IsFirstRoundBombWin,this);
 
             rigLeftUses = RigMaxUses;
             canDetonate = false;

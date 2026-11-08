@@ -1,11 +1,10 @@
 
 # Citation
 
-"Citation.WereWolf.name" : "狼人杀"
 
 # States
 "state.partyAccident" : "舞会事故"
-"state.tdg.boom" : "爆炸"
+"state.tdg.boom" : "焚化"
 
 # Options
 "config.client.options.tdg.showtaskpanel" : "会议内显示任务面板"

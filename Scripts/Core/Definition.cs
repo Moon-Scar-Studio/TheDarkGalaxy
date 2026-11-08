@@ -34,7 +34,7 @@ public static class State
 [NebulaPreprocess(PreprocessPhase.PostLoadAddons)]
 public static class StatePreprocessor
 {
-    static void Preprocess(NebulaPreprocessor preprocessor)
+    public static void Preprocess(NebulaPreprocessor preprocessor)
     {
         State.PartyAccident = preprocessor.RegisterCommunicableText("state.partyAccident");
         State.Boom = preprocessor.RegisterCommunicableText("state.tdg.boom");
