@@ -1,9 +1,3 @@
-﻿# Citation
-
-"Citation.WereWolf.name" : "狼人杀"
-
-# Roles
-
 "role.maskeddancer.name" : "假面舞者"
 "role.maskeddancer.short" : "假舞"
 "role.maskeddancer.blurb" : "跟我一起共舞吧？"
@@ -24,35 +18,3 @@
 "button.label.maskeddancer.InviteBtn" : "邀请"
 "button.label.maskeddancer.StartBtn" : "开启舞会"
 "role.maskeddancer.tips" : "· 本职业由<b>The Dark Galaxy</b>添加。"
-
-# States
-"state.partyAccident" : "舞会事故"
-
-# Options
-"config.client.options.tdg.showtaskpanel" : "会议内显示任务面板"
-"config.client.options.tdg.showplayerleftdetail" : "显示详细退出信息"
-"config.client.options.tdg.showplayerleftdetail.detail" : "当有玩家退出时，显示的断线信息为更详细的原因。"
-
-# 提示
-"notifier.disconnectmsg.exit": "<color=#%COLOR%>%NAME%</color> <color=red>主动离开</color>了游戏。 (%REA%)",
-"notifier.disconnectmsg.ban": "<color=#%COLOR%>%NAME%</color> <color=#D32F2F>被封禁于该房间。</color> (%REA%)",
-"notifier.disconnectmsg.kick": "<color=#%COLOR%>%NAME%</color> <color=#FF9800>被踢出了该房间。</color> (%REA%)",
-"notifier.disconnectmsg.disconnect": "<color=#%COLOR%>%NAME%</color> <color=#FFC107>与服务器断开了连接。</color> (%REA%)",
-
-# Help filters
-"help.filter.faction" : "阵营"
-"help.filter.citation" : "引用"
-"help.filter.all" : "全部"
-"help.filter.none" : "无引用"
-"help.filter.reset" : "重置"
-"help.filter.empty" : "没有符合条件的职业"
-
-"help.filter.faction.button" : "阵营筛选"
-"help.filter.citation.button" : "引用筛选"
-"help.filter.clear.button" : "清除筛选"
-"help.filter.faction.title" : "阵营筛选"
-"help.filter.citation.title" : "引用筛选"
-"help.filter.tab.image" : "图片"
-"help.filter.tab.text" : "文字"
-"help.filter.confirm" : "确定"
-"help.filter.cancel" : "取消"

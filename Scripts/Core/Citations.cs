@@ -28,6 +28,6 @@ public static class Citations
         );
 
     public static Citation TheDarkGalaxy_GoodEndGambler { get; private set; } = new(
-        "GoodEndGambler",DarkUtils.AsImage("Citations/TDG_GoodEndGambler.png",125),new ColorTextComponent(Cor.Cyan,new RawTextComponent("GoodEndGambler")),"https://tdg.moonscar.cn/"
+        "GoodEndGambler",DarkUtils.AsImage("Citations/TDG_GoodEndGambler.png",150),new ColorTextComponent(Cor.Cyan,new RawTextComponent("GoodEndGambler")),"https://tdg.moonscar.cn/"
         );
 }

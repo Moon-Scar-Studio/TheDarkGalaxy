@@ -1,0 +1,4 @@
+incinerator.detonate1,0,once,
+incinerator.selfBoom,1,secret,once,sp0,
+incinerator.kill5,2,noHint,once,sp0,sp1,sp2,
+incinerator.killAllImpostors,2,noHint,once,sp0,sp1,sp2,

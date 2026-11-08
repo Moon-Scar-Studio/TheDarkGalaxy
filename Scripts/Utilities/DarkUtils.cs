@@ -14,6 +14,11 @@ public static class DarkUtils
     public static List<GamePlayer> GetAllCrew() => GamePlayer.AllPlayers.Where(p => p.Role.Role.Category == RoleCategory.CrewmateRole).ToList();
     public static List<GamePlayer> GetAllNeu() => GamePlayer.AllPlayers.Where(p => p.Role.Role.Category == RoleCategory.NeutralRole).ToList();
     public static GamePlayer ToVirialPlayer(this PlayerControl pc) => GamePlayer.GetPlayer(pc.PlayerId)!;
+    public static void ShowTitle(string content,Virial.Color color,float dur,bool shake = false)
+    {
+        var title = NebulaAPI.CurrentGame?.GetModule<TitleShower>();
+        title?.SetText(content,color,dur,shake);
+    }
 }
 public static class ColorUtils
 {

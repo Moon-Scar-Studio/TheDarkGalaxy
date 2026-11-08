@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BepInEx;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ public class Main
     public const bool DebugMode = true;
     public static void Load()
     {
+        if (DebugMode)
+            ConsoleManager.CreateConsole();
         Harmony harmony = new("cn.moonscar.thedarkgalaxy");
         harmony.PatchAll(); // harmony 注册
         OptionsManager.Init();// 客户端选项注入
@@ -22,7 +25,7 @@ public class Main
 
     public static IEnumerator Preprocess(NebulaPreprocessor preprocessor)
     {
-        yield return preprocessor.SetLoadingText("Load The Dark Galaxy");
+        yield return preprocessor.SetLoadingText("Loading TheDarkGalaxy");
         Load();
     }
 
