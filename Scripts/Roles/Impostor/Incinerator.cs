@@ -125,12 +125,24 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
         int expKills;
         bool countingExp;
         int impostorsBeforeExplosion;
+        static bool firstRound = true;
+        static bool usedBombInFirstRound;
+        static float lastBombExplosionTime = -999f;
         
         public void OnActivated()
         {
             GameOperatorManager.Instance?.Subscribe<PlayerKillPlayerEvent>(OnPlayerKillPlayer, this);
 
             if (!AmOwner) return;
+
+            firstRound = true;
+            usedBombInFirstRound = false;
+            lastBombExplosionTime = -999f;
+            GameOperatorManager.Instance?.Subscribe<MeetingStartEvent>(_ => firstRound = false, this);
+            GameOperatorManager.Instance?.SubscribeAchievement<GameEndEvent>(
+                "incinerator.firstRoundWin",
+                IsFirstRoundBombWin,
+                this);
 
             rigLeftUses = RigMaxUses;
             canDetonate = false;
@@ -373,6 +385,17 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
             activeDetonationId = 0;
             button.StartCoolDown();
         }
+        bool IsFirstRoundBombWin(GameEndEvent ev)
+        {
+            if (!firstRound || !usedBombInFirstRound) return false;
+            if (ev.EndState == null) return false;
+            if (ev.EndState.EndCondition != NebulaGameEnd.ImpostorWin) return false;
+            if (ev.EndState.EndReason != GameEndReason.Situation) return false;
+            if (Time.time - lastBombExplosionTime > 2.5f) return false;
+
+            var last = NebulaGameManager.Instance?.LastDead;
+            return last != null && (last == MyPlayer || last.MyKiller == MyPlayer);
+        }
         System.Collections.IEnumerator CoFinishExpCount(float seconds)
         {
             yield return Effects.Wait(seconds);
@@ -387,7 +410,7 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
 
             int impostorsAfter = GamePlayer.AllPlayers.Count(p => p.IsImpostor && !p.IsDead);
 
-            if (MyPlayer.AmOwner && impostorsBeforeExplosion > 0 && impostorsAfter == 0)
+            if (MyPlayer.AmOwner && impostorsBeforeExplosion > 1 && impostorsAfter == 0)
                 _ = new StaticAchievementToken("incinerator.killAllImpostors");
         }
         void FinishDetonation(ModAbilityButton button)
@@ -492,7 +515,24 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
             CanceledDetonations.Remove(id);
 
             if (bomber.AmOwner)
+            {
                 _ = new StaticAchievementToken("incinerator.detonate1");
+
+                if (firstRound)
+                    usedBombInFirstRound = true;
+
+                lastBombExplosionTime = Time.time;
+
+                if (NebulaAPI.AmongUs.MapId == 2 &&
+                    ShipStatus.Instance != null &&
+                    ShipStatus.Instance.FastRooms.TryGetValue(SystemTypes.BoilerRoom, out var boilerRoom) &&
+                    boilerRoom != null &&
+                    boilerRoom.roomArea != null &&
+                    boilerRoom.roomArea.OverlapPoint(pos))
+                {
+                    _ = new StaticAchievementToken("incinerator.polusBoiler");
+                }
+            }
 
             NebulaManager.Instance.StartCoroutine(CoPlayExplosion(pos, radius).WrapToIl2Cpp());
 

@@ -24,7 +24,7 @@ public static class Citations
         );
 
     public static Citation Werewolf { get; private set; } = new(
-        "Werewolf", null,new ColorTextComponent(Color.Red,new RawTextComponent(Language.Translate("Citation.WereWolf.name"))), "https://langrensha.163.com/"
+        "Werewolf", null,new ColorTextComponent(Color.Red,new RawTextComponent("狼人杀")),"https://langrensha.163.com/"
         );
 
     public static Citation TheDarkGalaxy_GoodEndGambler { get; private set; } = new(

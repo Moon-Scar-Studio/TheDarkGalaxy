@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Virial;
+using Virial.Runtime;
+using Virial.Text;
 using Color = Virial.Color;
 
 namespace Dark.Scripts.Core;
@@ -25,8 +27,18 @@ public static class State
     /// <summary>
     /// 死因：舞会事故
     /// </summary>
-    public static TranslatableTag PartyAccident = new("state.partyAccident");
-    public static TranslatableTag Boom = new("state.tdg.boom");
+    public static CommunicableTextTag PartyAccident { get; internal set; } = null!;
+    public static CommunicableTextTag Boom { get; internal set; } = null!;
+}
+
+[NebulaPreprocess(PreprocessPhase.PostLoadAddons)]
+public static class StatePreprocessor
+{
+    static void Preprocess(NebulaPreprocessor preprocessor)
+    {
+        State.PartyAccident = preprocessor.RegisterCommunicableText("state.partyAccident");
+        State.Boom = preprocessor.RegisterCommunicableText("state.tdg.boom");
+    }
 }
 public static class Team
 {

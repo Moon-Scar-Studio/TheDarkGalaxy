@@ -11,14 +11,24 @@
 "achievement.incinerator.kill5.goal" : "在一次引爆中成功击杀5人以上"
 "achievement.incinerator.kill5.flavor" : "骨灰级聚会，概不退款。"
 "achievement.incinerator.kill5.splitted.0" : "宏大的"
-"achievement.incinerator.kill5.splitted.1" : "爆炸的"
-"achievement.incinerator.kill5.splitted.2" : "葬礼"
+"achievement.incinerator.kill5.splitted.1" : "葬礼"
+"achievement.incinerator.kill5.splitted.2" : "爆炸了"
 
 "achievement.incinerator.killAllImpostors.title" : "不好！"
 "achievement.incinerator.killAllImpostors.goal" : "一次爆炸炸死所有存活的伪装者。"
-"achievement.incinerator.killAllImpostors.cond" : "爆炸前至少有一名伪装者存活+爆炸后没有任何伪装者存活"
+"achievement.incinerator.killAllImpostors.cond" : "爆炸前至少有一名伪装者存活(自己不算)+爆炸后没有任何伪装者存活"
 "achievement.incinerator.killAllImpostors.flavor" : "你真棒！"
 "achievement.incinerator.killAllImpostors.splitted.0" : "死去的"
 "achievement.incinerator.killAllImpostors.splitted.1" : "失策的"
 "achievement.incinerator.killAllImpostors.splitted.2" : "伪装者们"
+
+"achievement.incinerator.firstRoundWin.title" : "首杀！"
+"achievement.incinerator.firstRoundWin.goal" : "在第一轮引爆，并且直接导致伪装者胜利。"
+"achievement.incinerator.firstRoundWin.cond" : "第一轮使用引爆+爆炸后立即达成伪装者胜利"
+
+"achievement.incinerator.polusBoiler.title" : "天时、地利、人和！"
+"achievement.incinerator.polusBoiler.goal" : "在 Polus 的锅炉房引爆尸体。"
+"achievement.incinerator.polusBoiler.cond" : "在 Polus 地图+尸体位于锅炉房时引爆"
+"achievement.incinerator.polusBoiler.flavor" : "锅炉房又爆炸了。"
+"achievement.incinerator.polusBoiler.splitted.1" : "房间"
 
