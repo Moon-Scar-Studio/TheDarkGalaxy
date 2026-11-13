@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,6 +13,10 @@
 	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	  <RootNamespace>Dark</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Language\SChinese\Roles\Impostor\Incinerator.dat" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
@@ -49,6 +53,7 @@
 		</ItemGroup>
 	</Target>
 	<ItemGroup>
+	  <Folder Include="Language\SChinese\Roles\Crewmates\" />
 	  <Folder Include="Resources\Buttons\Impostor\" />
 	</ItemGroup>
 </Project>

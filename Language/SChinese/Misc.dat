@@ -1,21 +1,21 @@
 
 # Citation
 
-
-# States
-"state.partyAccident" : "舞会事故"
-"state.tdg.boom" : "焚化"
+"Citation.WereWolf.name" : "狼人杀"
 
 # Options
+
 "config.client.options.tdg.showtaskpanel" : "会议内显示任务面板"
 "config.client.options.tdg.showplayerleftdetail" : "显示详细退出信息"
 "config.client.options.tdg.showplayerleftdetail.detail" : "当有玩家退出时，显示的断线信息为更详细的原因。"
 
 # 提示
+
 "notifier.disconnectmsg.exit": "<color=#%COLOR%>%NAME%</color> <color=red>主动离开</color>了游戏。 (%REA%)",
 "notifier.disconnectmsg.ban": "<color=#%COLOR%>%NAME%</color> <color=#D32F2F>被封禁于该房间。</color> (%REA%)",
 "notifier.disconnectmsg.kick": "<color=#%COLOR%>%NAME%</color> <color=#FF9800>被踢出了该房间。</color> (%REA%)",
 "notifier.disconnectmsg.disconnect": "<color=#%COLOR%>%NAME%</color> <color=#FFC107>与服务器断开了连接。</color> (%REA%)",
 
 # Title
+
 "role.incinerator.warningtext" : "你感受到了一股热浪"
