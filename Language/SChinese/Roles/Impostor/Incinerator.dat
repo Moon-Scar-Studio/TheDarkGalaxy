@@ -1,4 +1,4 @@
-﻿# Assignable
+# Assignable
 
 "role.incinerator.name" : "焚化工"
 "role.incinerator.short" : "焚"
@@ -27,6 +27,9 @@
 # Options
 
 "options.role.incinerator.detail" : "你可以处理尸体，使其可以被引爆，炸死附近的所有人。如果处理过的尸体被吃掉，引爆则炸死食用者。"
+"options.role.incinerator.RigGroup" : "处理设置"
+"options.role.incinerator.DetonateGroup" : "引爆设置"
+"options.role.incinerator.DragGroup" : "拖拽设置"
 "options.role.incinerator.RigCoolDown" : "处理冷却"
 "options.role.incinerator.RigMaxUses" : "处理最大使用次数"
 "options.role.incinerator.CanBoomOther" : "引爆击杀选择"
@@ -40,6 +43,7 @@
 "options.role.incinerator.CantMove" : "处理时无法移动"
 "options.role.incinerator.RigTime" : "处理所需时间"
 "options.role.incinerator.CanDragBody" : "可以拖拽尸体"
+"options.role.incinerator.BlockReportDuringDetonation" : "引爆过程中无法报告被处理的尸体"
 "options.role.incinerator.ExplosionRadius" : "引爆范围"
 "options.role.incinerator.EnableWarning" : "启用警告"
 "options.role.incinerator.WarningDuration" : "引爆前摇"

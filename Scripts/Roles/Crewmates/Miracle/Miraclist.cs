@@ -30,19 +30,20 @@ namespace Dark.Scripts.Roles.Crewmates.Miracle;
 · 命途只能选择船员职业。
  */
 // 神迹者
-public class Miraclist : DefinedRoleTemplate, RuntimeAssignableGenerator<RuntimeRole>, HasCitation, IAssignableDocument,DefinedRole
+public class Miraclist : DefinedRoleTemplate, RuntimeAssignableGenerator<RuntimeRole>, HasCitation, IAssignableDocument, DefinedRole
 {
     // 有没有私聊频道
-    static readonly BoolConfiguration HasPrivateChat = NebulaAPI.Configurations.Configuration("options.role.miraclist.HasPrivateChat",true);
+    static readonly BoolConfiguration HasPrivateChat = NebulaAPI.Configurations.Configuration("options.role.miraclist.HasPrivateChat", true);
 
     // 奇迹能不能招募神种
-    public static readonly BoolConfiguration CanChooseSeed = NebulaAPI.Configurations.Configuration("options.role.miraclist.CanChooseSeed",true);
-    static readonly IntegerConfiguration NeedMeetingCount = NebulaAPI.Configurations.Configuration("options.role.miraclist.NeedMeetingCount", (1,10,1),1);
-    static readonly BoolConfiguration CantBeGuess = NebulaAPI.Configurations.Configuration("options.role.miraclist.CantBeGuess",true);
-    static readonly BoolConfiguration SholdPublicRole = NebulaAPI.Configurations.Configuration("options.role.miraclist.PublicRole",true);
-    static readonly FloatConfiguration FateWeaveCoolDown = NebulaAPI.Configurations.Configuration("options.role.miraclist.FateWeaveCD",(0,60,3.5f),15);
-    static readonly ValueConfiguration<int> BeMiracleType = NebulaAPI.Configurations.Configuration("options.role.miraclist.BeMiracleType", ["options.role.miraclist.BeMiracleType.DoAllTasks", "options.role.miraclist.BeMiracleType.MeetingCount"],0);
-    public Miraclist() : base("miraclist", Cor.Golden, RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [HasPrivateChat, CanChooseSeed, CantBeGuess, SholdPublicRole, FateWeaveCoolDown, NeedMeetingCount,BeMiracleType])
+    public static readonly BoolConfiguration CanChooseSeed = NebulaAPI.Configurations.Configuration("options.role.miraclist.CanChooseSeed", true);
+    static readonly IntegerConfiguration NeedMeetingCount = NebulaAPI.Configurations.Configuration("options.role.miraclist.NeedMeetingCount", (1, 10, 1), 1);
+    static readonly BoolConfiguration CantBeGuess = NebulaAPI.Configurations.Configuration("options.role.miraclist.CantBeGuess", true);
+    static readonly BoolConfiguration SholdPublicRole = NebulaAPI.Configurations.Configuration("options.role.miraclist.PublicRole", true);
+    static readonly FloatConfiguration FateWeaveCoolDown = NebulaAPI.Configurations.Configuration("options.role.miraclist.FateWeaveCD", (0, 60, 3.5f), 15);
+    static readonly ValueConfiguration<int> BeMiracleType = NebulaAPI.Configurations.Configuration("options.role.miraclist.BeMiracleType", ["options.role.miraclist.BeMiracleType.DoAllTasks", "options.role.miraclist.BeMiracleType.MeetingCount"], 0);
+    static readonly ValueConfiguration<int> DivineSightType = NebulaAPI.Configurations.Configuration("options.role.miraclist.DivineSightType", ["options.role.miraclist.DivineSightType.Meeting", "options.role.miraclist.DivineSightType.Normal"], 0);
+    public Miraclist() : base("miraclist", Cor.Golden, RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [HasPrivateChat, CanChooseSeed, CantBeGuess, SholdPublicRole, FateWeaveCoolDown, NeedMeetingCount, BeMiracleType])
     {
 
     }
@@ -76,7 +77,15 @@ public class Miraclist : DefinedRoleTemplate, RuntimeAssignableGenerator<Runtime
             meetingCount = 0;
             canUseFateWeave = false;
             _oraclistPlayer = null!;
-            var fateWeaveBtn = NebulaAPI.Modules.AbilityButton(this,MyPlayer,VirtualKeyInput.Ability,FateWeaveCoolDown,"FATE",fateWeave,(button)=>canUseFateWeave);
+            var fateWeaveBtn = NebulaAPI.Modules.AbilityButton(this, MyPlayer, VirtualKeyInput.Ability, FateWeaveCoolDown, "FATE", fateWeave, (button) => canUseFateWeave);
+            if (DivineSightType.GetValue() != 1) 
+            {
+                DivineSightImg = DarkUtils.AsImage("Crewmates/DivineSightMeeting.png");
+                return;
+            }
+            DivineSightImg = DarkUtils.AsImage("Crewmates/DivineSightNormal.png");
+            var divineSightBtn = NebulaAPI.Modules.EffectButton(this,MyPlayer,VirtualKeyInput.FixedAbility,1,1,"A",DivineSightImg);
+            
         }
         [Local]
         public void OnMeetingStart(MeetingStartEvent ev)
@@ -113,20 +122,28 @@ public class Miraclist : DefinedRoleTemplate, RuntimeAssignableGenerator<Runtime
         {
             if (!HasOraclist()) return;
             if (ev.Player != _oraclistPlayer) return;
-            if (ev.Player.Tasks.IsCompletedTotalTasks)
-            {
-                _oraclistPlayer.AddModifier(Oraclist.MyRole);
-            }
+            if (!ev.Player.Tasks.IsCompletedTotalTasks) return;
+            _oraclistPlayer.AddModifier(Oraclist.MyRole);
         }
         public void Deco27(PlayerDecorateNameEvent ev)
         {
             if (!AmOwner) return;
             
-            if (ev.Player.TryGetModifier<Oraclist.Instance>(out var m))
+            if (ev.Player.TryGetModifier<Oraclist.Instance>(out var _))
             {
                 // 是神谕，加后缀
-                string orig = ev.Player.PlayerName;
                 ev.Name += "<color=#D4AF37>O</color>";
+            }
+        }
+        [Local]
+        public void PlayerKillEvent(PlayerKillPlayerEvent ev)
+        {
+            if(ev.Player == _oraclistPlayer)
+            {
+                _oraclistPlayer.RemoveModifier(Oraclist.MyRole);
+                _oraclistPlayer = null!;
+                AmongUsUtil.PlayCustomFlash(Cor.Golden,0.2f,3,0.6f);
+                MyPlayer.SetRole(Crewmate.MyRole);
             }
         }
         bool HasOraclist() => _oraclistPlayer != null;
@@ -135,19 +152,18 @@ public class Miraclist : DefinedRoleTemplate, RuntimeAssignableGenerator<Runtime
 }
 
 // 神谕者
-public class Oraclist : DefinedAllocatableModifierTemplate, HasCitation, DefinedModifier, RuntimeAssignableGenerator<RuntimeModifier>
+public class Oraclist : DefinedAllocatableModifierTemplate, HasCitation, DefinedAllocatableModifier
 {
-    public Oraclist() : base("oraclist", Cor.Golden) { }
+    public Oraclist() : base("oraclist","oraclist", Cor.Golden) { }
 
     public Citation? Citation => Core.Citations.TheDarkGalaxy;
-
+    bool ISpawnable.IsSpawnable => false;
     public RuntimeModifier CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
-    bool DefinedAssignable.ShowOnHelpScreen => false;
     
     public static Oraclist MyRole = new();
     public class Instance: RuntimeAssignableTemplate, RuntimeModifier
     {
-
+        bool RuntimeAssignable.CanBeAwareAssignment => false;
         public Instance(GamePlayer player) : base(player)
         {
         }
@@ -160,16 +176,17 @@ public class Oraclist : DefinedAllocatableModifierTemplate, HasCitation, Defined
     }
 }
 // 奇迹
-public class Miracle: DefinedModifierTemplate, HasCitation, DefinedModifier, RuntimeAssignableGenerator<RuntimeModifier>
+public class Miracle: DefinedAllocatableModifierTemplate, HasCitation, DefinedAllocatableModifier
 {
-    public Miracle() : base("miracle",Cor.Golden) { }
+    public Miracle() : base("miracle","miracle",Cor.Golden) { }
 
     public Citation? Citation => Core.Citations.TheDarkGalaxy;
-
+    bool ISpawnable.IsSpawnable => false;
     public RuntimeModifier CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
     public static Miracle MyRole = new();
     public class Instance : RuntimeAssignableTemplate, RuntimeModifier
     {
+        bool RuntimeAssignable.CanBeAwareAssignment => false;
         public Instance(GamePlayer player) : base(player)
         {
         }
@@ -182,16 +199,17 @@ public class Miracle: DefinedModifierTemplate, HasCitation, DefinedModifier, Run
     }
 }
 // 神种
-public class DivineSeed: DefinedModifierTemplate, HasCitation, DefinedModifier, RuntimeAssignableGenerator<RuntimeModifier>
+public class DivineSeed: DefinedAllocatableModifierTemplate, HasCitation, DefinedAllocatableModifier
 {
-    public DivineSeed() : base("divineseed",Cor.Golden) { }
+    public DivineSeed() : base("divineseed","ds",Cor.Golden) { }
 
     public Citation? Citation => Core.Citations.TheDarkGalaxy;
-
+    bool ISpawnable.IsSpawnable => false;
     public RuntimeModifier CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
     public static DivineSeed MyRole = new();
     public class Instance : RuntimeAssignableTemplate, RuntimeModifier
     {
+        bool RuntimeAssignable.CanBeAwareAssignment => false;
         public Instance(GamePlayer player) : base(player)
         {
         }

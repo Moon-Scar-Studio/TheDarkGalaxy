@@ -36,22 +36,49 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
     static readonly FloatConfiguration RigTime = NebulaAPI.Configurations.Configuration("options.role.incinerator.RigTime",(0,60,2.5f),5);
 
     static readonly BoolConfiguration CanDragBody = NebulaAPI.Configurations.Configuration("options.role.incinerator.CanDragBody",true);
+    static readonly BoolConfiguration BlockReportDuringDetonation = NebulaAPI.Configurations.Configuration("options.role.incinerator.BlockReportDuringDetonation",true);
     static readonly FloatConfiguration ExplosionRadius = NebulaAPI.Configurations.Configuration("options.role.incinerator.ExplosionRadius",(1f,10f,0.5f),3f,FloatConfigurationDecorator.Ratio);
     static readonly BoolConfiguration EnableWarning = NebulaAPI.Configurations.Configuration("options.role.incinerator.EnableWarning",true);
     static readonly FloatConfiguration WarningDuration = NebulaAPI.Configurations.Configuration("options.role.incinerator.WarningDuration",(0f,10f,0.5f),2f,FloatConfigurationDecorator.Second);
     static readonly BoolConfiguration LeaveBody = NebulaAPI.Configurations.Configuration("options.role.incinerator.LeaveBody",false);
-    static readonly FloatConfiguration DragDuration = NebulaAPI.Configurations.Configuration("options.role.incinerator.DragDuration",(1f,30f,0.5f),5f,FloatConfigurationDecorator.Second);
-    static readonly FloatConfiguration DragCoolDown = NebulaAPI.Configurations.Configuration("options.role.incinerator.DragCoolDown",(0f,60f,2.5f),10f,FloatConfigurationDecorator.Second);
+    static readonly FloatConfiguration DragDuration = NebulaAPI.Configurations.Configuration("options.role.incinerator.DragDuration",(1f,30f,0.5f),5f,FloatConfigurationDecorator.Second,()=>CanDragBody);
+    static readonly FloatConfiguration DragCoolDown = NebulaAPI.Configurations.Configuration("options.role.incinerator.DragCoolDown",(0f,60f,2.5f),10f,FloatConfigurationDecorator.Second,()=>CanDragBody);
+
     public Citation? Citation => Core.Citations.TheDarkGalaxy_GoodEndGambler;
 
-    public Incinerator() : base("incinerator", Virial.Color.ImpostorColor, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [RigCoolDown,RigMaxUses,CanBoomOther,NeedBodyPos,DetonateCoolDown,CantMove,RigTime, CanDragBody, ExplosionRadius, EnableWarning, WarningDuration, LeaveBody, DragDuration, DragCoolDown])
-    {
+    public Incinerator() : base(
+        "incinerator",
+        Virial.Color.ImpostorColor,
+        RoleCategory.ImpostorRole,
+        NebulaTeams.ImpostorTeam,
+        [
+            EnableWarning,
+        // 处理
+        new GroupConfiguration(
+            "options.role.incinerator.RigGroup",
+            [RigMaxUses, RigTime, RigCoolDown, CantMove],
+            Virial.Color.ImpostorColor),
 
+        // 引爆
+        new GroupConfiguration(
+            "options.role.incinerator.DetonateGroup",
+            [CanBoomOther, NeedBodyPos, DetonateCoolDown,ExplosionRadius,WarningDuration, LeaveBody, BlockReportDuringDetonation],
+            Virial.Color.ImpostorColor),
+
+        // 拖拽
+        new GroupConfiguration(
+            "options.role.incinerator.DragGroup",
+            [CanDragBody, DragDuration, DragCoolDown],
+            Virial.Color.ImpostorColor),
+        ])
+    {
+        ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Incinerator.png")?.AsImage(115f);
     }
     public RuntimeRole CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
     public static readonly Incinerator MyRole = new();
     bool IAssignableDocument.HasTips => true;
     bool IAssignableDocument.HasAbility => true;
+    Image? DefinedAssignable.IconImage => NebulaAPI.AddonAsset.GetResource("RoleIcon/IncineratorIcon.png")?.AsImage(115);
     IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
     {
         yield return new AssignableDocumentImage(
@@ -278,6 +305,11 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
                     if (btn.EffectTimer!.IsProgressing)
                     {
                         countingExp = false;
+                        if (BlockReportDuringDetonation.GetValue() && DeadBody != null)
+                        {
+                            SetBodyReported(DeadBody.Player.PlayerId, false);
+                            RpcSetBodyReported.Invoke((DeadBody.Player.PlayerId, false));
+                        }
                         if (activeDetonationId != 0)
                             RpcCancel.Invoke(activeDetonationId);
                         activeDetonationId = 0;
@@ -308,7 +340,9 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
                 DragDuration.GetValue(),
                 "DRAG",
                 dragImage,
-                _ => MyPlayer.HoldingAnyDeadBody || (CanDragBody.GetValue() && tracker.CurrentTarget != null));
+                _ => MyPlayer.HoldingAnyDeadBody,
+                _ => CanDragBody && tracker.CurrentTarget != null
+                );
 
             dragButton.OnClick = btn =>
             {
@@ -341,6 +375,17 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
         {
             return (MyPlayer.PlayerId << 24) | (++detonationCounter & 0xFFFFFF);
         }
+        static void SetBodyReported(byte playerId, bool blocked)
+        {
+            var body = Nebula.Utilities.Helpers.AllDeadBodies()
+                .FirstOrDefault(b => (b.ParentId & 0x7F) == playerId);
+
+            if (body != null)
+                body.Reported = blocked;
+        }
+        static readonly RemoteProcess<(byte playerId, bool blocked)> RpcSetBodyReported = new(
+            "tdgRpcBodyReported",
+            (msg, _) => SetBodyReported(msg.playerId, msg.blocked));
         void CleanupDetonatedBody(Virial.Game.DeadBody body)
         {
             if (body.IsActive)
@@ -363,6 +408,13 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
             countingExp = true;
             expKills = 0;
             impostorsBeforeExplosion = GamePlayer.AllPlayers.Count(p => p.IsImpostor && !p.IsDead);
+
+            if (useWarning && BlockReportDuringDetonation.GetValue())
+            {
+                SetBodyReported(body.Player.PlayerId, true);
+                RpcSetBodyReported.Invoke((body.Player.PlayerId, true));
+            }
+
             Rpc炸炸炸.Invoke((body.Position, MyPlayer, flags, radius, warningDuration, activeDetonationId));
 
             NebulaManager.Instance.StartCoroutine(CoFinishExpCount(useWarning ? warningDuration+1.2f:1.2f).WrapToIl2Cpp());
@@ -413,7 +465,16 @@ public class Incinerator : DefinedRoleTemplate, HasCitation, RuntimeAssignableGe
         void FinishDetonation(ModAbilityButton button)
         {
             if (DeadBody != null)
-                CleanupDetonatedBody(DeadBody);
+            {
+                var body = DeadBody;
+                CleanupDetonatedBody(body);
+
+                if (BlockReportDuringDetonation.GetValue())
+                {
+                    SetBodyReported(body.Player.PlayerId, false);
+                    RpcSetBodyReported.Invoke((body.Player.PlayerId, false));
+                }
+            }
 
             canDetonate = false;
             DeadBody = null;
