@@ -21,6 +21,8 @@ public static class Cor
     static readonly public Color ImaginationCor = new(128, 128, 128);
     static readonly public Color Golden = new(0.8313725f, 0.6862745f, 0.2156863f);
     static readonly public Color Violet = new(0.93f, 0.51f, 0.93f);
+    static readonly public Color MiraclistGold = new(1f, 0.8784314f, 0.4f);
+    static readonly public Color OtherMiracleGold = new(1f, 0.8509804f, 0.4f);
 }
 public static class State
 {
