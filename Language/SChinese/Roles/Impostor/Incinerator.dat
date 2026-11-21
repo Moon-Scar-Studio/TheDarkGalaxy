@@ -8,7 +8,7 @@
 
 "role.incinerator.doc" : "你可以处理尸体并且引爆。"
 "role.incinerator.ability.title" : "固有能力【锅炉准备】"
-"role.incinerator.ability.main" : "焚化工可以通过处理来引爆尸体。"
+"role.incinerator.ability.main" : "焚化工可以通过处理来引爆尸体。![本地立绘](./Resources/RoleImage/Incinerator.png)(style='width: 40%; opacity: 0.85; object-fit: contain')<br>![URL图片](https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/72x72/1f600.png)(style='width: 64px; height: 64px; opacity: 0.8')<br>[Bilibili链接](https://www.bilibili.com/) [https://www.bilibili.com/](!)<br><rainbow>彩虹文字示例</rainbow> <gradient from='#FF6600' to='#00FFFF'>渐变文字示例</gradient> <random>随机颜色示例</random>"
 "role.incinerator.doc.rig" : "<title>处理</title>处理一个尸体<var>%RIGTIME%秒</var>%CANTMOVE%<br><var>最多可用%RIGMU%次。</var>"
 "role.incinerator.doc.detonate" : "<title>引爆</title>处理尸体后，可以<var>%NEEDPOS%</var>。<br>引爆可以炸死<var>%OTHER%</var>。<br>引爆范围为<var>%EXPRAD%x。</var><br>%ENABLEWAR%引爆在<var>%DUR%</var>秒后生效。"
 "role.incinerator.doc.drag" : "<title>拖拽</title><var>你可以拖拽尸体</var>。"

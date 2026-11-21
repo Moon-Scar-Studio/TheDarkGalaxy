@@ -11,10 +11,10 @@
 
 # 提示
 
-"notifier.disconnectmsg.exit": "<color=#%COLOR%>%NAME%</color> <color=red>主动离开</color>了游戏。 (%REA%)",
-"notifier.disconnectmsg.ban": "<color=#%COLOR%>%NAME%</color> <color=#D32F2F>被封禁于该房间。</color> (%REA%)",
-"notifier.disconnectmsg.kick": "<color=#%COLOR%>%NAME%</color> <color=#FF9800>被踢出了该房间。</color> (%REA%)",
-"notifier.disconnectmsg.disconnect": "<color=#%COLOR%>%NAME%</color> <color=#FFC107>与服务器断开了连接。</color> (%REA%)",
+"notifier.disconnectmsg.exit": "<color=#%COLOR%>%NAME%</color> <color=red>主动离开</color>了游戏。 (%REA%)"
+"notifier.disconnectmsg.ban": "<color=#%COLOR%>%NAME%</color> <color=#D32F2F>被封禁于该房间。</color> (%REA%)"
+"notifier.disconnectmsg.kick": "<color=#%COLOR%>%NAME%</color> <color=#FF9800>被踢出了该房间。</color> (%REA%)"
+"notifier.disconnectmsg.disconnect": "<color=#%COLOR%>%NAME%</color> <color=#FFC107>与服务器断开了连接。</color> (%REA%)"
 
 # Title
 

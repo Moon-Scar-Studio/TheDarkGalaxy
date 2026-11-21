@@ -14,7 +14,7 @@ namespace Dark.Scripts.Core;
 
 public static class Citations
 {
-    public static Citation TheDarkGalaxy { get; private set; } = new(
+    public static Citation TheDarkGalaxy_hvtXsvc { get; private set; } = new(
         "TheDarkGalaxy",
         DarkUtils.AsImage("Citations/TDG.png",125),
         new ColorTextComponent(
