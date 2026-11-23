@@ -1,0 +1,98 @@
+# Assignable
+
+"role.incinerator.name" : "焚化工"
+"role.incinerator.short" : "焚"
+"role.incinerator.blurb" : "我会为你们带来一场宏大的葬礼！"
+
+# Document
+
+"role.incinerator.doc" : "你可以处理尸体并且引爆。"
+"role.incinerator.ability.title" : "固有能力【锅炉准备】"
+"role.incinerator.ability.main" : "焚化工可以通过处理来引爆尸体。![本地立绘](./Resources/RoleImage/Incinerator.png)(style='width: 40%; opacity: 0.85; object-fit: contain')<br>![URL图片](https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/72x72/1f600.png)(style='width: 64px; height: 64px; opacity: 0.8')<br>[Bilibili链接](https://www.bilibili.com/) [https://www.bilibili.com/](!)<br><rainbow>彩虹文字示例</rainbow> <gradient from='#FF6600' to='#00FFFF'>渐变文字示例</gradient> <random>随机颜色示例</random>"
+"role.incinerator.doc.rig" : "<title>处理</title>处理一个尸体<var>%RIGTIME%秒</var>%CANTMOVE%<br><var>最多可用%RIGMU%次。</var>"
+"role.incinerator.doc.detonate" : "<title>引爆</title>处理尸体后，可以<var>%NEEDPOS%</var>。<br>引爆可以炸死<var>%OTHER%</var>。<br>引爆范围为<var>%EXPRAD%x。</var><br>%ENABLEWAR%引爆在<var>%DUR%</var>秒后生效。"
+"role.incinerator.doc.drag" : "<title>拖拽</title><var>你可以拖拽尸体</var>。"
+"role.incinerator.doc.canboomother.all" : "范围内所有的人"
+"role.incinerator.doc.canboomother.self" : "范围内除了其他伪装者的人"
+"role.incinerator.doc.canboomother.mate" : "范围内除了你自己的人"
+"role.incinerator.doc.canboomother.excludeSelfNMate" : "范围内除了你和其他伪装者的人"
+"role.incinerator.doc.needpos.True" : "在尸体的交互范围内引爆"
+"role.incinerator.doc.needpos.False" : "随时引爆"
+"role.incinerator.doc.cantmove.True" : "，<var>处理过程中无法移动</var>。"
+"role.incinerator.doc.cantmove.False" : ""
+"role.incinerator.doc.enablewarning.True" : "<var>引爆时，范围内玩家会收到闪光警告<var>，"
+"role.incinerator.doc.enablewarning.False" : ""
+"role.incinerator.tips" : "· 该职业灵感来源于<b>「GoodEndGambler」</b>，由<b>The Dark Galaxy</b>添加。"
+
+# Options
+
+"options.role.incinerator.detail" : "你可以处理尸体，使其可以被引爆，炸死附近的所有人。如果处理过的尸体被吃掉，引爆则炸死食用者。"
+"options.role.incinerator.RigGroup" : "处理设置"
+"options.role.incinerator.DetonateGroup" : "引爆设置"
+"options.role.incinerator.DragGroup" : "拖拽设置"
+"options.role.incinerator.RigCoolDown" : "处理冷却"
+"options.role.incinerator.RigMaxUses" : "处理最大使用次数"
+"options.role.incinerator.CanBoomOther" : "引爆击杀选择"
+"options.role.incinerator.CanBoomOther.detail" : "进行引爆时，有哪些范围内的玩家会死亡"
+"options.role.incinerator.CanBoomSelf.AnyOne" : "所有人"
+"options.role.incinerator.CanBoomSelf.CanSelf" : "除其他伪装者之外"
+"options.role.incinerator.CanBoomSelf.CanMate" : "除自己之外"
+"options.role.incinerator.CanBoomSelf.ExcludeSelfAndMate" : "除自己与其他伪装者之外"
+"options.role.incinerator.NeedBodyPos" : "引爆需要在尸体交互范围内"
+"options.role.incinerator.Detonate" : "引爆冷却"
+"options.role.incinerator.CantMove" : "处理时无法移动"
+"options.role.incinerator.RigTime" : "处理所需时间"
+"options.role.incinerator.CanDragBody" : "可以拖拽尸体"
+"options.role.incinerator.BlockReportDuringDetonation" : "引爆过程中无法报告被处理的尸体"
+"options.role.incinerator.ExplosionRadius" : "引爆范围"
+"options.role.incinerator.EnableWarning" : "启用警告"
+"options.role.incinerator.WarningDuration" : "引爆前摇"
+"options.role.incinerator.LeaveBody" : "爆炸后保留尸体"
+"options.role.incinerator.DragDuration" : "拖拽持续时间"
+"options.role.incinerator.DragCoolDown" : "拖拽冷却"
+
+# UI
+
+"button.label.RIG" : "处理"
+"button.label.DRAG" : "拖拽"
+"button.label.DETONATE" : "引爆"
+
+# Status
+
+"state.tdg.boom" : "焚化"
+
+# Achievement
+
+"achievement.incinerator.detonate1.title" : "Surprise!"
+"achievement.incinerator.detonate1.goal" : "使用一次引爆"
+"achievement.incinerator.detonate1.flavor" : "全体目光向我看齐！"
+
+"achievement.incinerator.selfBoom.title" : "玩火自焚"
+"achievement.incinerator.selfBoom.goal" : "引爆时击杀自己"
+"achievement.incinerator.selfBoom.flavor" : "至少很暖和，不是么..."
+"achievement.incinerator.selfBoom.splitted.0" : "自焚的"
+
+"achievement.incinerator.kill5.title" : "一场宏大的葬礼！"
+"achievement.incinerator.kill5.goal" : "在一次引爆中成功击杀5人以上"
+"achievement.incinerator.kill5.flavor" : "“遇到尸体时，一定要带着别人一起靠近他再等上个几秒钟”-- 《船员生存指南》（疑似被篡改） "
+"achievement.incinerator.kill5.splitted.0" : "宏大的"
+"achievement.incinerator.kill5.splitted.1" : "葬礼"
+"achievement.incinerator.kill5.splitted.2" : "爆炸了"
+
+"achievement.incinerator.killAllImpostors.title" : "误伤专家"
+"achievement.incinerator.killAllImpostors.goal" : "一次爆炸炸死所有存活的伪装者。"
+"achievement.incinerator.killAllImpostors.cond" : "爆炸前至少有一名伪装者存活(自己不算)+爆炸后没有任何伪装者存活"
+"achievement.incinerator.killAllImpostors.flavor" : "你真棒！"
+"achievement.incinerator.killAllImpostors.splitted.0" : "死去的"
+"achievement.incinerator.killAllImpostors.splitted.1" : "失策的"
+"achievement.incinerator.killAllImpostors.splitted.2" : "伪装者们"
+
+"achievement.incinerator.firstRoundWin.title" : "专业炸弹人"
+"achievement.incinerator.firstRoundWin.goal" : "在第一轮引爆，并且直接导致伪装者胜利。"
+"achievement.incinerator.firstRoundWin.cond" : "第一轮使用引爆+爆炸后立即达成伪装者胜利"
+
+"achievement.incinerator.polusBoiler.title" : "天时、地利、人和！"
+"achievement.incinerator.polusBoiler.goal" : "在 Polus 的锅炉房引爆尸体。"
+"achievement.incinerator.polusBoiler.cond" : "在 Polus 地图+尸体位于锅炉房时引爆"
+"achievement.incinerator.polusBoiler.flavor" : "锅炉房又爆炸了。"
+"achievement.incinerator.polusBoiler.splitted.1" : "房间"
